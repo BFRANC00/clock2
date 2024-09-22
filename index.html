@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Clock and To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Current Time: <span id="clock"></span></h1>
+
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Add a new task...">
+    <button id="addTaskButton">Add Task</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        // Clock function
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // initial call to avoid delay
+
+        // To-Do List functionality
+        const taskInput = document.getElementById('taskInput');
+        const addTaskButton = document.getElementById('addTaskButton');
+        const taskList = document.getElementById('taskList');
+
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        function renderTasks() {
+            taskList.innerHTML = '';
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.textContent = task;
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => {
+                    tasks.splice(index, 1);
+                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                    renderTasks();
+                };
+                li.appendChild(deleteButton);
+                taskList.appendChild(li);
+            });
+        }
+
+        addTaskButton.onclick = () => {
+            const task = taskInput.value;
+            if (task) {
+                tasks.push(task);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                taskInput.value = '';
+                renderTasks();
+            }
+        };
+
+        renderTasks(); // Load tasks from localStorage
+    </script>
+</body>
+</html>
