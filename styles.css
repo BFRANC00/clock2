@@ -1,0 +1,45 @@
+body {
+    background-color: #FFD1DC; /* pastel pink */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* big, bubbly font */
+}
+
+h1, h2 {
+    color: #C71585; /* deep pink */
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    background-color: #C71585; /* deep pink */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #A500A0; /* darker pink on hover */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    width: 300px; /* adjust as needed */
+}
